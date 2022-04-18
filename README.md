@@ -9,7 +9,7 @@ that we would like to undertake by building a Recurrent Neural Network model whi
 
 
 ## Model Figure 
-![model](a3diagrams/modeldiagram.png)
+![model](a3diagrams/modeldiagram.jpg)
 
 ## Model Parameters
 Our model has 4 parameters, namely input_size, hidden_size, num_layers, and output_size. The input_size represents the number of expected features in our input vector. In our task, input_size=1 because we are only using the closing feature for our predictions. The hidden_size is the number of units in each hidden state and is a hyperparameter that can be tuned. In our task, hidden_size=128. The num_layers represent the number of recurrent layers in our model. For example, setting num_layers=2 means stacking two GRUs together such that we create a stacked GRU, where the second GRU takes in outputs from the first GRU to generate a prediction. In our task, num_layers=1 because we have been working with single-layer GRUs in this course. Finally, output_size represents the size of the output vector which is our prediction. In our task, output_size=1 because we are predicting the stock closing price for the next day, given a sequence of arbitrary length, where the length represents the number of previous days.
@@ -72,8 +72,8 @@ Notice that we are splitting the data up by company as each data sequence descri
 
 ## Training Curve 
 We will be using the training curve from the third training run of our model. This is because after observing the plots for the learning curve, training loss and validation loss, we noticed that they looked roughly the same across each run. However, for the third training run, we noticed that the values for training loss were lower compared to the values obtained in the other runs. Also, the learning curve loss was slowly decreasing as well for this run. We believe this is due to the lower learning rate and removal of weight decay, as changing these values led to less fluctuations in our plots. Below are the resultant plots for the learning curve, training and validation curve.
-![LC3](a3diagrams/learncurve3.png)
-![TC3](a3diagrams/traincurve3.png)
+![LC3](a3diagrams/learncurve3.jpg)
+![TC3](a3diagrams/traincurve3.jpg)
 
 ## Hyperparameter Tuning 
 We trained our model using six different sets of hyperparameters. Assume that 
