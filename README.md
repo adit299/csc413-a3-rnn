@@ -16,16 +16,16 @@ Our model has 4 parameters, namely input_size, hidden_size, num_layers, and outp
 
 
 ## Model Examples 
-Successful One: 
-Position of input sequence in the Test Set: 526
-Ground Truth Label of input sequence: 3.91
-Model Prediction of input sequence: 3.9494571685791016
+**Successful One:** 
+Position of input sequence in the Test Set: 526\
+Ground Truth Label of input sequence: 3.91\
+Model Prediction of input sequence: 3.9494571685791016\
 Difference between True Value and Model Prediction: 0.03945716857910142
 
-Unsuccessful One:
-Position Number of  input sequence in Test Set: 126
-Ground Truth Label of input sequence: 887.87
-Model Prediction of input sequence: 109.58541107177734
+**Unsuccessful One:**
+Position Number of  input sequence in Test Set: 126\
+Ground Truth Label of input sequence: 887.87\
+Model Prediction of input sequence: 109.58541107177734\
 Difference between True Value and Model Prediction: 778.2845889282227
 
 
@@ -42,21 +42,20 @@ We use the phrase “stock” to mean either a stock or an ETF.
 ## Data Summary
 Each line of each file represents the value of that stock on a particular day, summarised as follows:
 
-Date : The date which that particular line of data is from
-Open : The price of the stock is valued at, at the daily open, 9:30 am ET
-High : The highest price that the stock was valued at during the day
-Low : The lowest price that the stock was valued at during the day
-Close : The price that the stock was valued at the closing of the trading day, 4:00pm ET
-Volume : The total number unique shares of the stock that were traded during the day
-OpenInt : From what we can tell this is “The Open Interest”. We actually can’t tell what this is, but across all files it is constant 0, so we are just going to ignore it.
+**Date :** The date which that particular line of data is from\
+**Open :** The price of the stock is valued at, at the daily open, 9:30 am ET\
+**High :** The highest price that the stock was valued at during the day\
+**Low :** The lowest price that the stock was valued at during the day\
+**Close :** The price that the stock was valued at the closing of the trading day, 4:00pm ET\
+**Volume :** The total number unique shares of the stock that were traded during the day\
+**OpenInt :** From what we can tell this is “The Open Interest”. We actually can’t tell what this is, but across all files it is constant 0, so we are just going to ignore it.
 
-Since each stock has been publicly traded for different lengths of time,
-the length of each file is different. In some cases, the stock has been public for only a few months, and has less than 100 lines of data. In other cases the stock has
+Since each stock has been publicly traded for different lengths of time, the length of each file is different. In some cases, the stock has been public for only a few months, and has less than 100 lines of data. In other cases the stock has
 been public for several decades and has several thousand lines of data.
 
-Here is an excerpt from the file “aapl.us.txt” which represents the price history of Apple Inc.
-Date,Open,High,Low,Close,Volume,OpenInt
-1984-09-07,0.42388,0.42902,0.41874,0.42388,23220030,0
+Here is an excerpt from the file “aapl.us.txt” which represents the price history of Apple Inc.\
+Date,Open,High,Low,Close,Volume,OpenInt\
+1984-09-07,0.42388,0.42902,0.41874,0.42388,23220030,0\
 1984-09-10,0.42388,0.42516,0.41366,0.42134,18022532,0
 
 ## Data Transformation
@@ -74,12 +73,11 @@ Notice that we are splitting the data up by company as each data sequence descri
 ## Training Curve 
 We will be using the training curve from the third training run of our model. This is because after observing the plots for the learning curve, training loss and validation loss, we noticed that they looked roughly the same across each run. However, for the third training run, we noticed that the values for training loss were lower compared to the values obtained in the other runs. Also, the learning curve loss was slowly decreasing as well for this run. We believe this is due to the lower learning rate and removal of weight decay, as changing these values led to less fluctuations in our plots. Below are the resultant plots for the learning curve, training and validation curve.
 
-
 ## Hyperparameter Tuning 
 We trained our model using six different sets of hyperparameters. Assume that 
 model = StockPredictGRU() is called before every call to training.
 
-First Training Run
+**First Training Run**\
 We will start with a batch size of 300 because the default value of 128 is less compared to the number of datapoints we have (6605), so our plots may have a lot of noise and we want to avoid this. We will also run for 40 epochs and keep the default values for our weight_decay and learning_rate for now to see what loss is being generated. 
 
 train_loader = StockBatcher(train, batch_size=300, drop_last=False)
@@ -91,7 +89,7 @@ train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_
 The final five values for the learning curve loss are 562.390991; 4448.698242, 877.532471, 781.620728, 151420.562500. The final five values for the training curve loss are 38556.550057, 38610.214685, 38602.280872, 38550.211950,  38617.118164. Lets try increasing the weight decay and decreasing the learning rate. 
 
 
-Second Training Run
+**Second Training Run**\
 train_loader = StockBatcher(train, batch_size=300, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=300, drop_last=False)
  
@@ -101,7 +99,7 @@ train_rnn_network(model, train_loader, valid_loader, weight_decay=0.01, learning
 The final five loss values are 205.152161, 52.720432, 95.500214, 170.549133, 391.289093. The final five training costs are 76832.615981, 76819.604463, 76814.843674, 76868.370351, 76860.09528. The learning curve loss fluctuates but is much lower compared to the values obtained in the first run. The training cost is much higher. Lets try increasing the batch size, removing the weight decay and decreasing the number of epochs to see if the training loss decreases and the fluctuations in the learning curves reduce.
 
 
-Third Training Run
+**Third Training Run**\
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
@@ -112,7 +110,7 @@ The final five values for the learning curve loss are 68.401688, 2917.834473, 91
  
 Let’s try reducing the learning rate even further to see if the smaller updates help. We’ll continue with 0 weight decay, and use 30 epochs.
  
-Fourth training run
+**Fourth training run**\
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
  
@@ -124,20 +122,18 @@ The final five values for the learning curve loss are 1.362639, 300.884796, 0.51
 
 Next we’ll try and use a very small weight decay, along with this small learning rate, to see if they can produce better results.
 
-Fifth training run
+**Fifth training run**\
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
 train_rnn_network(model3, train_loader, valid_loader, weight_decay=5*(10**(-3)), learning_rate=0.001, num_epochs=30). The resultant plots for the learning and training curves looks like this,
 
 
-
-
 The final five values for the learning curve loss are 252110896.000000, 3272.985107, 34613.980469, 0.056904, 580.347534. The final five values for the training cost are 49598.491862, 29912.300642,  29914.273150,  29908.7642104, 29909.844177. 
 
 Finally, we will try and reduce the weight decay to an even smaller amount.
 
-Sixth training run
+**Sixth training run**\
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
@@ -150,7 +146,7 @@ The final five values for the learning curve loss are 0.668878, 15.802783, 137.7
 Due to the nature of our problem, using a strict equality of prediction and label is unreasonable since getting an exact value as a prediction with no variance every time is highly unlikely. To combat this, we came to the conclusion that using loss as the measure for our model’s performance made the most sense. More specifically using Mean-Squared Loss, this will not penalize our model for getting a prediction slightly incorrect – Low loss values indicate good performance, and high loss values indicate worse performance. When using the test set on our model we will be measuring its performance with average loss (cost), this way we will get a single value to represent how the model performed against data it has never seen before. 
 
 ## Justification of Results
-We used our trained model from the third training run to make predictions for the test set. This is because we observed smaller values for training loss in this run compared to the other five runs and less fluctuations in our resultant plots. We believe the less fluctuations and the consistent, decreasing loss is due to the smaller learning rate used for this run. To visualise our predictions, we use the following plots to display the labels (ground truth values for the closing feature) of our test set (blue curve) compared to the predictions we have made for the closing feature using our model (orange curve). 
+We used our trained model from the third training run to make predictions for the test set. This is because we observed smaller values for training loss in this run compared to the other five runs and less fluctuations in our resultant plots. We believe the less fluctuations and the consistent, decreasing loss is due to the smaller learning rate used for this run. To visualise our predictions, we use the following plots to display the labels (ground truth values for the closing feature) of our test set (blue curve) compared to the predictions we have made for the closing feature using our model (orange curve).\ 
 
 However, it is difficult to observe the trend of the predictions using the plot above, so we will analyse smaller portions of the plot to view the curve easily. Below is the plot of the predictions and ground truth values for the first 170 sequences in our test test. 
 
@@ -173,50 +169,50 @@ The use of this model impacts those who take part in trading within the stock ma
 
 ## Authors
 
-Adit:
-Contributed to architecture plans for model
-Contributed to data collection, data analysis, and data transformation process (implemented init_data function)
-Implemented data augmentation process
-Implemented “stock batcher” process
-Wrote training code for model
-Responsible for “Qualitative Results” and “Introduction” portion of README
-Contributed to “Data” related results from README 
+**Adit**
+Contributed to architecture plans for model \
+Contributed to data collection, data analysis, and data transformation process (implemented init_data function) \
+Implemented data augmentation process \
+Implemented “stock batcher” process \
+Wrote training code for model \
+Responsible for “Qualitative Results” and “Introduction” portion of README \
+Contributed to “Data” related results from README \ 
 
-Jonathan
-Contributed to data collection, analysis and transformation
-Contributed to early data exploration
-Contributed to training and tuning of hyper parameters
-Contributed to Stock Batcher portion of code
-Wrote the data source, data summary, data transformation, and data split sections of the README.
-Wrote the  “Quantitative Results” section of the README.
+**Jonathan**
+Contributed to data collection, analysis and transformation \
+Contributed to early data exploration \
+Contributed to training and tuning of hyper parameters \
+Contributed to Stock Batcher portion of code \
+Wrote the data source, data summary, data transformation, and data split sections of the README. \
+Wrote the  “Quantitative Results” section of the README. \
 Contributed to the hyper parameter training section of the README
 
-Maham
-In the code, I
-Contributed to model design and creation 
-Contributed to training 
-Created a function ‘get_testcost’ to plot the predictions vs the ground truth labels for our test set, and generated several plots to analyse trends 
+**Maham**
+In the code, I\
+Contributed to model design and creation\
+Contributed to training\
+Created a function ‘get_testcost’ to plot the predictions vs the ground truth labels for our test set, and generated several plots to analyse trends\
 Contributed to finding correct and incorrect predictions from the model
 
-In the Readme, I worked on the following sections
-The Model Parameters 
-Contributed to Model Examples
-Training Curve Explanation
-Contributed to Hyperparameter Tuning
+In the Readme, I worked on the following sections\
+The Model Parameters\
+Contributed to Model Examples\
+Training Curve Explanation\
+Contributed to Hyperparameter Tuning\
 Contributed to Justification of Results
 
-Abhirag
-Model Implementation:  
-Contributed in the model design and its creation
-Implemented the forward function  
-Contributed in implementations of the training and cost functions 
-Contributed in the creating the “Prediction vs Ground Truth” plots  
+**Abhirag**
+Model Implementation:\  
+Contributed in the model design and its creation\
+Implemented the forward function\
+Contributed in implementations of the training and cost functions\ 
+Contributed in the creating the “Prediction vs Ground Truth” plots\  
 - Finding correct and incorrect predictions
 
-README File: 
-Created the diagram of how the model performs the forward pass 
-Decided on how we will judge the performance of our model (Quantitative Measures)
-Contributed in Model Examples
-Considered the Ethical Implications of the creation of such a model 
+README File:\
+Created the diagram of how the model performs the forward pass\ 
+Decided on how we will judge the performance of our model (Quantitative Measures)\
+Contributed in Model Examples\
+Considered the Ethical Implications of the creation of such a model\ 
 Contributed in Justification of Results 
 
