@@ -18,12 +18,14 @@ Our model has 4 parameters, namely input_size, hidden_size, num_layers, and outp
 
 ## Model Examples 
 **Successful One:** 
+\
 Position of input sequence in the Test Set: 526\
 Ground Truth Label of input sequence: 3.91\
 Model Prediction of input sequence: 3.9494571685791016\
 Difference between True Value and Model Prediction: 0.03945716857910142
 
 **Unsuccessful One:**
+\
 Position Number of  input sequence in Test Set: 126\
 Ground Truth Label of input sequence: 887.87\
 Model Prediction of input sequence: 109.58541107177734\
@@ -79,15 +81,17 @@ We will be using the training curve from the third training run of our model. Th
 
 ## Hyperparameter Tuning 
 We trained our model using six different sets of hyperparameters. Assume that 
-model = StockPredictGRU() is called before every call to training.
+```model = StockPredictGRU()``` is called before every call to training.
 
-**First Training Run**\
+**First Training Run**
 We will start with a batch size of 300 because the default value of 128 is less compared to the number of datapoints we have (6605), so our plots may have a lot of noise and we want to avoid this. We will also run for 40 epochs and keep the default values for our weight_decay and learning_rate for now to see what loss is being generated. 
-
+```
 train_loader = StockBatcher(train, batch_size=300, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=300, drop_last=False)
  
-train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_rate=0.1, num_epochs=40). The resultant plots are, 
+train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_rate=0.1, num_epochs=40)
+```
+The resultant plots are, 
 
 ![LC1](a3diagrams/learncurve1.jpg)
 ![TC1](a3diagrams/traincurve1.jpg)
@@ -95,11 +99,14 @@ train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_
 The final five values for the learning curve loss are 562.390991; 4448.698242, 877.532471, 781.620728, 151420.562500. The final five values for the training curve loss are 38556.550057, 38610.214685, 38602.280872, 38550.211950,  38617.118164. Lets try increasing the weight decay and decreasing the learning rate. 
 
 
-**Second Training Run**\
+**Second Training Run**
+```
 train_loader = StockBatcher(train, batch_size=300, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=300, drop_last=False)
  
-train_rnn_network(model, train_loader, valid_loader, weight_decay=0.01, learning_rate=0.01, num_epochs=40). The resultant plots are,
+train_rnn_network(model, train_loader, valid_loader, weight_decay=0.01, learning_rate=0.01, num_epochs=40)
+```
+The resultant plots are, 
 
 ![LC2](a3diagrams/learncurve2.jpg)
 ![TC2](a3diagrams/traincurve2.jpg)
@@ -107,11 +114,14 @@ train_rnn_network(model, train_loader, valid_loader, weight_decay=0.01, learning
 The final five loss values are 205.152161, 52.720432, 95.500214, 170.549133, 391.289093. The final five training costs are 76832.615981, 76819.604463, 76814.843674, 76868.370351, 76860.09528. The learning curve loss fluctuates but is much lower compared to the values obtained in the first run. The training cost is much higher. Lets try increasing the batch size, removing the weight decay and decreasing the number of epochs to see if the training loss decreases and the fluctuations in the learning curves reduce.
 
 
-**Third Training Run**\
+**Third Training Run**
+```
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
-train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_rate=0.01, num_epochs=35). The resultant plots for the learning and training curves looks like this, 
+train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_rate=0.01, num_epochs=35)
+```
+The resultant plots are, 
 
 ![LC3](a3diagrams/learncurve3.jpg)
 ![TC3](a3diagrams/traincurve3.jpg)
@@ -120,11 +130,14 @@ The final five values for the learning curve loss are 68.401688, 2917.834473, 91
  
 Let’s try reducing the learning rate even further to see if the smaller updates help. We’ll continue with 0 weight decay, and use 30 epochs.
  
-**Fourth training run**\
+**Fourth training run**
+```
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
  
-train_rnn_network(model3, train_loader, valid_loader, weight_decay=0, learning_rate=0.001, num_epochs=30). The resultant plots for the learning and training curves looks like this, 
+train_rnn_network(model3, train_loader, valid_loader, weight_decay=0, learning_rate=0.001, num_epochs=30)
+```
+The resultant plots are, 
 
 ![LC4](a3diagrams/learncurve4.jpg)
 ![TC4](a3diagrams/traincurve4.jpg)
@@ -133,11 +146,14 @@ The final five values for the learning curve loss are 1.362639, 300.884796, 0.51
 
 Next we’ll try and use a very small weight decay, along with this small learning rate, to see if they can produce better results.
 
-**Fifth training run**\
+**Fifth training run**
+```
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
-train_rnn_network(model3, train_loader, valid_loader, weight_decay=5*(10**(-3)), learning_rate=0.001, num_epochs=30). The resultant plots for the learning and training curves looks like this,
+train_rnn_network(model3, train_loader, valid_loader, weight_decay=5*(10**(-3)), learning_rate=0.001, num_epochs=30)
+```
+The resultant plots are,
 
 ![LC5](a3diagrams/learncurve5.jpg)
 ![TC5](a3diagrams/traincurve5.jpg)
@@ -146,11 +162,14 @@ The final five values for the learning curve loss are 252110896.000000, 3272.985
 
 Finally, we will try and reduce the weight decay to an even smaller amount.
 
-**Sixth training run**\
+**Sixth training run**
+```
 train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
-train_rnn_network(model3, train_loader, valid_loader, weight_decay=5*(10**(-4)), learning_rate=0.001, num_epochs=30) The resultant plots for the learning and training curves looks like this,
+train_rnn_network(model3, train_loader, valid_loader, weight_decay=5*(10**(-4)), learning_rate=0.001, num_epochs=30) 
+```
+The resultant plots are, 
 
 ![LC6](a3diagrams/learncurve6.jpg)
 ![TC6](a3diagrams/traincurve6.jpg)
