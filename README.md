@@ -9,7 +9,7 @@ that we would like to undertake by building a Recurrent Neural Network model whi
 
 
 ## Model Figure 
-<img src="a3diagrams/modeldiagram.jpg" width="1000">
+![modeldiagram](a3diagrams/CSC413_Final_Project_Diagram.png)
 
 
 ## Model Parameters
