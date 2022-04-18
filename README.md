@@ -73,6 +73,7 @@ Notice that we are splitting the data up by company as each data sequence descri
 
 ## Training Curve 
 We will be using the training curve from the third training run of our model. This is because after observing the plots for the learning curve, training loss and validation loss, we noticed that they looked roughly the same across each run. However, for the third training run, we noticed that the values for training loss were lower compared to the values obtained in the other runs. Also, the learning curve loss was slowly decreasing as well for this run. We believe this is due to the lower learning rate and removal of weight decay, as changing these values led to less fluctuations in our plots. Below are the resultant plots for the learning curve, training and validation curve.
+
 ![LC3](a3diagrams/learncurve3.jpg)
 ![TC3](a3diagrams/traincurve3.jpg)
 
@@ -88,6 +89,8 @@ valid_loader = StockBatcher(valid, batch_size=300, drop_last=False)
  
 train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_rate=0.1, num_epochs=40). The resultant plots are, 
 
+![LC1](a3diagrams/learncurve1.jpg)
+![TC1](a3diagrams/traincurve1.jpg)
 
 The final five values for the learning curve loss are 562.390991; 4448.698242, 877.532471, 781.620728, 151420.562500. The final five values for the training curve loss are 38556.550057, 38610.214685, 38602.280872, 38550.211950,  38617.118164. Lets try increasing the weight decay and decreasing the learning rate. 
 
@@ -98,6 +101,8 @@ valid_loader = StockBatcher(valid, batch_size=300, drop_last=False)
  
 train_rnn_network(model, train_loader, valid_loader, weight_decay=0.01, learning_rate=0.01, num_epochs=40). The resultant plots are,
 
+![LC2](a3diagrams/learncurve2.jpg)
+![TC2](a3diagrams/traincurve2.jpg)
 
 The final five loss values are 205.152161, 52.720432, 95.500214, 170.549133, 391.289093. The final five training costs are 76832.615981, 76819.604463, 76814.843674, 76868.370351, 76860.09528. The learning curve loss fluctuates but is much lower compared to the values obtained in the first run. The training cost is much higher. Lets try increasing the batch size, removing the weight decay and decreasing the number of epochs to see if the training loss decreases and the fluctuations in the learning curves reduce.
 
@@ -108,6 +113,8 @@ valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
 train_rnn_network(model, train_loader, valid_loader, weight_decay=0.0, learning_rate=0.01, num_epochs=35). The resultant plots for the learning and training curves looks like this, 
 
+![LC3](a3diagrams/learncurve3.jpg)
+![TC3](a3diagrams/traincurve3.jpg)
 
 The final five values for the learning curve loss are 68.401688, 2917.834473, 91832.281250, 24.985926, 645.217468. The final five values for the training cost are 23100.059411, 23094.408892,  23089.378082,  23109.042306. The training loss is consistent and much lower compared to the first run, and the loss seems to fluctuate but decrease. If we were to increase the number of epochs to 40, we are inferring that the fluctuation might decrease and the loss will be consistent and lower.
  
@@ -118,8 +125,9 @@ train_loader = StockBatcher(train, batch_size=500, drop_last=False)
 valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
  
 train_rnn_network(model3, train_loader, valid_loader, weight_decay=0, learning_rate=0.001, num_epochs=30). The resultant plots for the learning and training curves looks like this, 
- 
 
+![LC4](a3diagrams/learncurve4.jpg)
+![TC4](a3diagrams/traincurve4.jpg)
 
 The final five values for the learning curve loss are 1.362639, 300.884796, 0.519497, 0.260414, 1.251674. The final five values for the training cost are 29921.169572, 29914.667754,  29911.407681,  29909.558584, 29907.429824. 
 
@@ -131,6 +139,8 @@ valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
 train_rnn_network(model3, train_loader, valid_loader, weight_decay=5*(10**(-3)), learning_rate=0.001, num_epochs=30). The resultant plots for the learning and training curves looks like this,
 
+![LC5](a3diagrams/learncurve5.jpg)
+![TC5](a3diagrams/traincurve5.jpg)
 
 The final five values for the learning curve loss are 252110896.000000, 3272.985107, 34613.980469, 0.056904, 580.347534. The final five values for the training cost are 49598.491862, 29912.300642,  29914.273150,  29908.7642104, 29909.844177. 
 
@@ -142,6 +152,8 @@ valid_loader = StockBatcher(valid, batch_size=500, drop_last=False)
 
 train_rnn_network(model3, train_loader, valid_loader, weight_decay=5*(10**(-4)), learning_rate=0.001, num_epochs=30) The resultant plots for the learning and training curves looks like this,
 
+![LC6](a3diagrams/learncurve6.jpg)
+![TC6](a3diagrams/traincurve6.jpg)
 
 The final five values for the learning curve loss are 0.668878, 15.802783, 137.756210, 0.160565, 0.477753. The final five values for the training cost are 29918.913680, 29915.452643,  29910.529355,  49583.860974, 29906.194459. 
 
@@ -149,13 +161,33 @@ The final five values for the learning curve loss are 0.668878, 15.802783, 137.7
 Due to the nature of our problem, using a strict equality of prediction and label is unreasonable since getting an exact value as a prediction with no variance every time is highly unlikely. To combat this, we came to the conclusion that using loss as the measure for our model’s performance made the most sense. More specifically using Mean-Squared Loss, this will not penalize our model for getting a prediction slightly incorrect – Low loss values indicate good performance, and high loss values indicate worse performance. When using the test set on our model we will be measuring its performance with average loss (cost), this way we will get a single value to represent how the model performed against data it has never seen before. 
 
 ## Justification of Results
-We used our trained model from the third training run to make predictions for the test set. This is because we observed smaller values for training loss in this run compared to the other five runs and less fluctuations in our resultant plots. We believe the less fluctuations and the consistent, decreasing loss is due to the smaller learning rate used for this run. To visualise our predictions, we use the following plots to display the labels (ground truth values for the closing feature) of our test set (blue curve) compared to the predictions we have made for the closing feature using our model (orange curve).\ 
+We used our trained model from the third training run to make predictions for the test set. This is because we observed smaller values for training loss in this run compared to the other five runs and less fluctuations in our resultant plots. We believe the less fluctuations and the consistent, decreasing loss is due to the smaller learning rate used for this run. To visualise our predictions, we use the following plots to display the labels (ground truth values for the closing feature) of our test set (blue curve) compared to the predictions we have made for the closing feature using our model (orange curve).
+
+![predvstruth](a3diagrams/predvstruthplot.jpg)
 
 However, it is difficult to observe the trend of the predictions using the plot above, so we will analyse smaller portions of the plot to view the curve easily. Below is the plot of the predictions and ground truth values for the first 170 sequences in our test test. 
 
+![predvstruth1](a3diagrams/predvstruth1.jpg)
+
 We can see in the circled areas above that the predictions, although not exactly the same as the correct values, differ from the ground truth slightly and still follow the same trend of test set labels. This idea is further observed if we consider the plots of the next 170 sequences until the end of our test set. 
 
-
+![predvstruth2](a3diagrams/predvstruth2.jpg) \
+\
+![predvstruth3](a3diagrams/predvstruth3.jpg)\
+\
+![predvstruth4](a3diagrams/predvstruth4.jpg)\
+\
+![predvstruth5](a3diagrams/predvstruth5.jpg)\
+\
+![predvstruth6](a3diagrams/predvsturth6.jpg)\
+\
+![predvstruth7](a3diagrams/predvstruth7.jpg)\
+\
+![predvstruth8](a3diagrams/predvstruth8.jpg)\
+\
+![predvstruth9](a3diagrams/predvstruth9.jpg)\
+\
+![predvstruth10](a3diagrams/predvstruth10.jpg)
 
 Since each plot contains a few hundred predictions that follow the trend of the correct labels, this allows us to conclude that our model works reasonably well. It is also important to keep in mind that the nature of stocks is unpredictable, thus, we are not expecting to see a high level of accuracy. There are instances where the data spikes, and this proves to be a challenge for our model as it shows that it is unable to make such drastic predictions. However the model does still predict that there is an increase in value wherever the data spikes, it just has trouble identifying the magnitude of the increase. Since these spikes are happening at "random" points we will consider them as outliers due to them being almost impossible to predict based on prior data. As stated in the quantitative analysis, data encoding sentiment analysis and news about the company is required for our model to perform better. We also have to consider that we are feeding in varied stock data from many different industries into our model, each of which have their own underlying market trends. From the plots, it is clear that the model is having trouble picking up any patterns and this could be due to the overload of data from different industries being fed to the model. Therefore, considering all of this, for us to achieve a fair level of similarity between the ground truth and predictions tells us that our model behaves in an acceptable way. 
 
