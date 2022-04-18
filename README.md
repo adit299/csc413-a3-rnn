@@ -169,50 +169,54 @@ The use of this model impacts those who take part in trading within the stock ma
 
 ## Authors
 
-**Adit**
-Contributed to architecture plans for model \
-Contributed to data collection, data analysis, and data transformation process (implemented init_data function) \
-Implemented data augmentation process \
-Implemented “stock batcher” process \
-Wrote training code for model \
-Responsible for “Qualitative Results” and “Introduction” portion of README \
-Contributed to “Data” related results from README \ 
+**Maadhav Adit Krishnan**:
 
-**Jonathan**
-Contributed to data collection, analysis and transformation \
-Contributed to early data exploration \
-Contributed to training and tuning of hyper parameters \
-Contributed to Stock Batcher portion of code \
-Wrote the data source, data summary, data transformation, and data split sections of the README. \
-Wrote the  “Quantitative Results” section of the README. \
-Contributed to the hyper parameter training section of the README
+- Contributed to architecture plans for model 
+- Contributed to data collection, data analysis, and data transformation process (implemented init_data function) 
+- Implemented data augmentation process 
+- Implemented “stock batcher” process 
+- Wrote training code for model 
+- Responsible for “Qualitative Results” and “Introduction” portion of README 
+- Contributed to “Data” related results from README 
 
-**Maham**
-In the code, I\
-Contributed to model design and creation\
-Contributed to training\
-Created a function ‘get_testcost’ to plot the predictions vs the ground truth labels for our test set, and generated several plots to analyse trends\
-Contributed to finding correct and incorrect predictions from the model
+**Jonathan McLaren Martin**:
 
-In the Readme, I worked on the following sections\
-The Model Parameters\
-Contributed to Model Examples\
-Training Curve Explanation\
-Contributed to Hyperparameter Tuning\
-Contributed to Justification of Results
+- Contributed to data collection, analysis and transformation 
+- Contributed to early data exploration 
+- Contributed to training and tuning of hyper parameters 
+- Contributed to Stock Batcher portion of code 
+- Wrote the data source, data summary, data transformation, and data split sections of the README. 
+- Wrote the  “Quantitative Results” section of the README. 
+- Contributed to the hyper parameter training section of the README
 
-**Abhirag**
-Model Implementation:\  
-Contributed in the model design and its creation\
-Implemented the forward function\
-Contributed in implementations of the training and cost functions\ 
-Contributed in the creating the “Prediction vs Ground Truth” plots\  
-- Finding correct and incorrect predictions
+**Maham Khan**:
 
-README File:\
-Created the diagram of how the model performs the forward pass\ 
-Decided on how we will judge the performance of our model (Quantitative Measures)\
-Contributed in Model Examples\
-Considered the Ethical Implications of the creation of such a model\ 
-Contributed in Justification of Results 
+In the code, I
+- Contributed to model design and creation
+- Contributed to training
+- Created a function ‘get_testcost’ to plot the predictions vs the ground truth labels for our test set, and generated several plots to analyse trends
+- Contributed to finding correct and incorrect predictions from the model
+
+In the README, I worked on the following sections
+- The Model Parameters
+- Contributed to Model Examples
+- Training Curve Explanation
+- Contributed to Hyperparameter Tuning
+- Contributed to Justification of Results
+
+ **Abhirag Rajan Nair** :
+
+Model Implementation: 
+- Contributed in the model design and its creation
+- Implemented the forward function
+- Contributed in implementations of the training and cost functions
+- Contributed in the creating the “Prediction vs Ground Truth” plots 
+   - Finding correct and incorrect predictions
+
+README File:
+- Model Figure
+- Quantitative Measures 
+- Contributed in Model Examples
+- Ethical Implications 
+- Contributed in Justification of Results 
 
